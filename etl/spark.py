@@ -1,3 +1,4 @@
+import pandas as pd
 from pyspark.sql import DataFrame, functions as f, SparkSession
 
 from .base import Engine
@@ -15,9 +16,6 @@ class Spark(Engine):
             .config('spark.executor.memory', '512M') \
             .config('spark.cores.max', 1) \
             .getOrCreate()
-        
-        sc = self.spark.sparkContext
-        sc.setLogLevel('ERROR')
     
     def read_csv(self, path: str):
         self.data_frame = self.spark.read.csv(path, header=True, inferSchema=True)
@@ -33,7 +31,8 @@ class Spark(Engine):
         
         self.data_frame = self.data_frame \
             .groupby(*dimensions) \
-            .avg(*metrics)
+            .avg(*metrics) \
+            .sort(dimensions)
         
         return self
     
@@ -42,5 +41,11 @@ class Spark(Engine):
         
         return self
     
-    def to_dict(self):
-        return list(map(lambda row: row.asDict(), self.data_frame.collect()))
+    def to_pandas(self) -> pd.DataFrame:
+        return self.data_frame.toPandas()
+    
+    def to_csv(self):
+        return self.to_pandas().to_csv(index=False, float_format='%.0f')
+    
+    def to_json(self):
+        return self.to_pandas().to_json(orient='records', double_precision=0)

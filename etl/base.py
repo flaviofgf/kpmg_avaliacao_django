@@ -2,7 +2,9 @@ from abc import ABC, abstractmethod
 
 
 class Engine(ABC):
-    data_frame = None
+    @property
+    def data_frame(self):
+        raise NotImplementedError
     
     @abstractmethod
     def read_csv(self, path: str):
@@ -17,5 +19,9 @@ class Engine(ABC):
         pass
     
     @abstractmethod
-    def to_dict(self):
+    def to_csv(self) -> str:
+        pass
+    
+    @abstractmethod
+    def to_json(self) -> str:
         pass
