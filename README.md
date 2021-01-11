@@ -1,7 +1,5 @@
 # AVALIAÇÃO PYTHON: KPMG
 
----
-
 ## Objetivo
 
 Este projeto visa responder à avaliação da KPMG.
