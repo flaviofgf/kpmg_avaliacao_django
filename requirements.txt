@@ -1,4 +1,7 @@
 Django
 djangorestframework
+drf-yasg
 pandas
 pyspark
+pyyaml
+uritemplate
