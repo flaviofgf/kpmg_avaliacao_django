@@ -13,7 +13,7 @@ Acesse a documentação da API no [Swagger](http://localhost:8000/swagger)
 O acesso à API requer o basic auth e o acesso ao swagger requer login no admin do django. O usuário e senha para as duas
 autenticações é `admin`.
 
-# Iniciando
+## Iniciando
 
 1. Implantar o docker-compose:
 
