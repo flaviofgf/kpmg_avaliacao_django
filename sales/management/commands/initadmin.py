@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        if User.objects.filter(username='admin1'):
+        if User.objects.filter(username='admin'):
             print('Admin user already exists')
         else:
             User.objects.create_superuser(
-                username='admin1',
+                username='admin',
                 password='admin',
             )
             

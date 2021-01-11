@@ -1,11 +1,9 @@
 services:
   django:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    command: bash -c "python manage.py migrate --noinput && python manage.py initadmin && python manage.py runserver 0.0.0.0:8000"
     ports:
       - '8000:8000'
-  #    depends_on:
-  #      - db
   spark:
     ports:
       - '8080:8080'
